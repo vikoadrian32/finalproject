@@ -4,11 +4,14 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" /> <!-- <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> -->
-    <!-- <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" /> -->
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
@@ -30,8 +33,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".StoreActivity"
+            android:name=".OvoPaymentActivity"
             android:exported="false" />
+        <activity
+            android:name=".OvoPasscodeActivity"
+            android:exported="false"/>
+        <activity android:name=".PaymentSuccessActivity"
+            android:exported="false"/>
         <activity
             android:name=".DetailProduct"
             android:exported="false" />

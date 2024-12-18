@@ -38,7 +38,7 @@ public class DetailProduct extends AppCompatActivity {
     private Button addtoCart;
     private ImageButton backButton;
     private FloatingActionButton likeBtn;
-    private String url = "http://192.168.27.175/WMP/get_recommend.php";
+    private String url = "http://192.168.1.59/WMP/get_recommend.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,7 @@ public class DetailProduct extends AppCompatActivity {
             productPrice.setText("$" + product_price);
         }
 
-        Picasso.get().load("http://192.168.27.175/WMP/" + product_image).into(productImage);
+        Picasso.get().load("http://192.168.1.59/WMP/" + product_image).into(productImage);
 
         likeBtn = findViewById(R.id.recommendBtn);
         likeBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class DetailProduct extends AppCompatActivity {
         addtoCart = findViewById(R.id.addtoCart);
         addtoCart.setOnClickListener(v-> {
             SharedPreferences sharedPreferences = getSharedPreferences("userProfile",Context.MODE_PRIVATE);
-            String url = "http://192.168.8.153/WMP/add_to_cart.php";
+            String url = "http://192.168.1.59/WMP/add_to_cart.php";
             String product_id = intent.getStringExtra("productId");
             String price;
             String userId  = sharedPreferences.getString("id","0");

@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -23,13 +25,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class CartFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private String url = "http://192.168.27.175/WMP/get_cart.php";
+    private String url = "http://192.168.1.59/WMP/get_cart.php";
     private ArrayList<Cart> cartList;
     private RecyclerView recyclerView;
     private CartAdapter cartAdapter;
@@ -37,6 +39,7 @@ public class CartFragment extends Fragment {
     private String mParam2;
     private double totalPrice = 0.0;
     private TextView textTotal;
+    private Button checkout;
 
     public CartFragment() {
         // Required empty public constructor
@@ -74,6 +77,17 @@ public class CartFragment extends Fragment {
         textTotal = view.findViewById(R.id.cartTotalPrice);
         fetchCart(userId);
 
+        checkout = view.findViewById(R.id.checkoutButton);
+        checkout.setOnClickListener(v->{
+            List<String> productIds = new ArrayList<>();
+            for (Cart cartItem : cartList) {
+                productIds.add(cartItem.getProduct_id());
+            }
+            // Kirim data product_id ke activity checkout
+            Intent intent = new Intent(getContext(), OvoPaymentActivity.class);
+            intent.putStringArrayListExtra("product_ids", new ArrayList<>(productIds));
+            startActivity(intent);
+        });
 
         return view;
     }
@@ -108,6 +122,7 @@ public class CartFragment extends Fragment {
                                 cartAdapter.notifyDataSetChanged();
                                 textTotal.setText("$" + String.format("%.2f", totalPrice));
                                 Log.d("CartList", "Cart contains: " + cartList.size() + " products");
+                                saveTotalPriceToPreferences(totalPrice);
                             } else {
                                 Log.e("CartError", "Failed to load cart: " + jsonResponse.getString("message"));
                             }
@@ -128,6 +143,13 @@ public class CartFragment extends Fragment {
         // Create a request queue and add the request
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(request);
+    }
+    private void saveTotalPriceToPreferences(double totalPrice) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("cartPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat("total_price", (float) totalPrice);
+        editor.apply();
+        Log.d("Cart", "Total price saved to SharedPreferences: " + totalPrice);
     }
 
 }

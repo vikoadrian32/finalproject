@@ -9,7 +9,11 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
+import android.content.Intent;
 
+import androidx.appcompat.app.AlertDialog;
 import android.os.Handler;
 import android.os.Looper;
 import android.speech.RecognizerIntent;
@@ -45,10 +49,10 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private ArrayList<Product> productList;
-    private String url = "http://192.168.27.175/WMP/get_products.php";
-    private String get_most_url = "http://192.168.27.175/WMP/get_most_recommend.php";
-    String url_find_product = "http://192.168.27.175/WMP/get_product.php";
-    String url_get_name= "http://192.168.27.175/WMP/get_product_name.php";
+    private String url = "http://192.168.1.59/WMP/get_products.php";
+    private String get_most_url = "http://192.168.1.59/WMP/get_most_recommend.php";
+    String url_find_product = "http://192.168.1.59/WMP/get_product.php";
+    String url_get_name= "http://192.168.1.59/WMP/get_product_name.php";
     private HashMap<String, Double> discountMap = new HashMap<>();
     private RecyclerView offerRecycler;
     private OfferAdapter offerAdapter;
@@ -135,8 +139,34 @@ public class HomeFragment extends Fragment {
         btnVoiceSearch.setOnClickListener(v->{
             startVoiceinput();
         });
+        checkBluetooth();
 
         return view;
+    }
+
+
+    private void checkBluetooth() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        if (bluetoothAdapter != null) { // Device supports Bluetooth
+            if (!bluetoothAdapter.isEnabled()) {
+                // Show recommendation dialog to enable Bluetooth
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Bluetooth Recommendation")
+                        .setMessage("We recommend enabling Bluetooth for a better experience. Would you like to turn it on?")
+                        .setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                                startActivity(enableBtIntent);
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            }
+        } else {
+            Toast.makeText(getContext(), "Bluetooth not supported on this device", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public int levenshteinDistance(String s1, String s2) {

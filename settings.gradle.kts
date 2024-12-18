@@ -4,11 +4,14 @@ pluginManagement {
             content {
                 includeGroupByRegex("com\\.android.*")
                 includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("com\\.github.*")
                 includeGroupByRegex("androidx.*")
             }
         }
         mavenCentral()
         gradlePluginPortal()
+
+
     }
 }
 dependencyResolutionManagement {
@@ -16,6 +19,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
     }
 }
 

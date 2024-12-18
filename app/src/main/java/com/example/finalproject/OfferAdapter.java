@@ -34,7 +34,7 @@ public class OfferAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (viewType == OfferItem.TYPE_IMAGE) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offer_design, parent, false);
             return new ImageViewHolder(view);
-        } else { // Must be TYPE_VIDEO
+        } else { 
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offer_design, parent, false);
             return new VideoViewHolder(view);
         }
@@ -60,10 +60,9 @@ public class OfferAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return offerList.size();
     }
 
-    // ViewHolder for image items
+
     public class ImageViewHolder extends RecyclerView.ViewHolder {
         ImageView offerImage;
-
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             offerImage = itemView.findViewById(R.id.offerImage);

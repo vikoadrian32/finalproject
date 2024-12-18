@@ -42,9 +42,12 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.8.8")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.picasso:picasso:2.8")
+    implementation(libs.play.services.location)
     implementation(libs.camera.view)
     implementation(libs.play.services.location)
+    implementation(libs.biometric)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 }

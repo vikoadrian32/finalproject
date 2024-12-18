@@ -53,7 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.productPrice.setText(cart.getProduct_price());
 
 
-        Picasso.get().load("http://192.168.27.175/WMP/" + cart.getProduct_image()).into(holder.productImage);
+        Picasso.get().load("http://192.168.1.59/WMP/" + cart.getProduct_image()).into(holder.productImage);
 
         holder.productQuantity.setText(Integer.toString(cart.getQuantity()));
 
@@ -149,7 +149,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             double productPrice = Double.parseDouble(cartItem.getProduct_price());
             totalPrice += productPrice * cartItem.getQuantity();
         }
-        // Update total price in Fragment or Activity
         TextView textTotal = ((Activity) context).findViewById(R.id.cartTotalPrice);  // Assuming it's in the activity
         textTotal.setText("$" + String.format("%.2f", totalPrice));
     }

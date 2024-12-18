@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+    <!-- Gradient Header -->
+    <LinearLayout
+        android:id="@+id/gradientHeader"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/gradient_background">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter Passcode"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- CardView for Passcode Entry -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/gradientHeader"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_milk"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your 6-digit Passcode"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Passcode Input -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/passcodeDigit1"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:inputType="numberPassword"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:background="@drawable/input_box_style"
+                    android:layout_margin="4dp" />
+
+                <EditText
+                    android:id="@+id/passcodeDigit2"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:inputType="numberPassword"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:maxLength="1"
+                    android:textSize="24sp"
+                    android:background="@drawable/input_box_style"
+                    android:layout_margin="4dp" />
+
+                <EditText
+                    android:id="@+id/passcodeDigit3"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:inputType="numberPassword"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:textSize="24sp"
+                    android:background="@drawable/input_box_style"
+                    android:layout_margin="4dp" />
+
+                <EditText
+                    android:id="@+id/passcodeDigit4"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:inputType="numberPassword"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:maxLength="1"
+                    android:textSize="24sp"
+                    android:background="@drawable/input_box_style"
+                    android:layout_margin="4dp" />
+
+                <EditText
+                    android:id="@+id/passcodeDigit5"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:inputType="numberPassword"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:textSize="24sp"
+                    android:background="@drawable/input_box_style"
+                    android:layout_margin="4dp" />
+
+                <EditText
+                    android:id="@+id/passcodeDigit6"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:textColor="@color/black"
+                    android:inputType="numberPassword"
+                    android:gravity="center"
+                    android:maxLength="1"
+                    android:textSize="24sp"
+                    android:background="@drawable/input_box_style"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Submit Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSubmitPasscode"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/gradientHeader"
+        android:layout_marginTop="250dp"
+        android:backgroundTint="@color/orange"
+        android:text="Submit"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="12dp" />
+</RelativeLayout>

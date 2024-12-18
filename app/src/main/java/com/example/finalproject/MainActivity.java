@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private String url = "http://192.168.27.175/WMP/login.php";
+    private String url = "http://192.168.1.59/WMP/login.php";
     EditText emailInput, passInput;
     Button loginBtn;
     @Override

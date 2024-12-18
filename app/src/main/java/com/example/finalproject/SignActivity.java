@@ -14,7 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 public class SignActivity extends AppCompatActivity {
-    private String url = "http://192.168.27.175/WMP/insert_regist_table.php";
+    private String url = "http://192.168.1.59/WMP/insert_regist_table.php";
 
     EditText etUsername, etEmail, etPass;
     Button signInBtn;

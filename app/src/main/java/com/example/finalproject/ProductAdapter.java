@@ -31,7 +31,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = productList.get(position);
         holder.productName.setText(product.getProductName());
         holder.productBrand.setText(product.getProductBrand());
-        Picasso.get().load("http://192.168.27.175/WMP/" + product.getProductImage()).into(holder.productImage);
+        Picasso.get().load("http://192.168.1.59/WMP/" + product.getProductImage()).into(holder.productImage);
         if (product.getDiscountPersen() > 0 &&
                 Double.parseDouble(product.getDiscountPrice().replace(",", ".")) < Double.parseDouble(product.getProductPrice())) {
 

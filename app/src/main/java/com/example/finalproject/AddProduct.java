@@ -36,7 +36,7 @@ public class AddProduct extends AppCompatActivity {
     private ImageView ivProductImage;
     private Button btnUploadImage, btnSaveProduct;
     private Bitmap selectedImage;
-    private String url = "http://192.168.27.175/WMP/insert_product.php";
+    private String url = "http://192.168.1.59/WMP/insert_product.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -11,6 +11,10 @@ import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
+import java.util.concurrent.Executor;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -101,9 +105,9 @@ public class ProfileFragment extends Fragment {
 
         LinearLayout addProduct = view.findViewById(R.id.start_selling);
         addProduct.setOnClickListener(view12 -> {
-            Intent addIntent = new Intent(getContext(), AddProduct.class);
-            startActivity(addIntent);
+            showBiometricPrompt(); // Trigger biometric authentication
         });
+
 
         logout = view.findViewById(R.id.logoutBtn);
         logout.setOnClickListener(view13 -> {
@@ -136,6 +140,52 @@ public class ProfileFragment extends Fragment {
                 });
         builder.create().show();
     }
+
+    private void showBiometricPrompt() {
+        BiometricManager biometricManager = BiometricManager.from(getContext());
+
+        if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                == BiometricManager.BIOMETRIC_SUCCESS) {
+
+            Executor executor = ContextCompat.getMainExecutor(getContext());
+
+            BiometricPrompt biometricPrompt = new BiometricPrompt(this, executor,
+                    new BiometricPrompt.AuthenticationCallback() {
+                        @Override
+                        public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+                            super.onAuthenticationSucceeded(result);
+                            Toast.makeText(getContext(), "Authentication successful!", Toast.LENGTH_SHORT).show();
+                            // Launch the AddProduct activity
+                            Intent addIntent = new Intent(getContext(), AddProduct.class);
+                            startActivity(addIntent);
+                        }
+
+                        @Override
+                        public void onAuthenticationError(int errorCode, CharSequence errString) {
+                            super.onAuthenticationError(errorCode, errString);
+                            Toast.makeText(getContext(), "Authentication error: " + errString, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onAuthenticationFailed() {
+                            super.onAuthenticationFailed();
+                            Toast.makeText(getContext(), "Authentication failed. Try again!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                    .setTitle("Fingerprint Authentication")
+                    .setSubtitle("Place your finger on the sensor to continue")
+                    .setNegativeButtonText("Cancel")
+                    .build();
+
+            biometricPrompt.authenticate(promptInfo);
+        } else {
+            Toast.makeText(getContext(), "Biometric authentication is not available on this device.",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void checkCameraPermission() {
         if (getActivity().checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
